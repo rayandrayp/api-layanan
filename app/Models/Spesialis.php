@@ -10,6 +10,8 @@ class Spesialis extends Model
     use HasFactory;
     protected $table = 'spesialis';
     protected $primaryKey = 'kd_sps';
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     public function dokter()
     {
