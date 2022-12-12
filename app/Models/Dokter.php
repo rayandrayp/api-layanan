@@ -9,4 +9,14 @@ class Dokter extends Model
 {
     use HasFactory;
     protected $table = 'dokter';
+
+    public function spesialis()
+    {
+        return $this->belongsTo(Spesialis::class,'kd_sps');
+    }
+
+    public function jadwal()
+    {
+        return $this->hasMany(Jadwal::class,'kd_dokter');
+    }
 }

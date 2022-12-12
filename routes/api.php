@@ -41,6 +41,10 @@ Route::group(['prefix' => 'pmkp'], function () {
     Route::get('/indikator-mutu-nasional/{year}', [PMKPController::class, 'indikatorMutuNasional']);
 });
 
+Route::group(['prefix'=>'spesialis'], function () {
+    Route::get('/', [SpesialisController::class, 'index']);
+    Route::get('/{kd_sps}', [SpesialisController::class, 'show']);
+});
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
