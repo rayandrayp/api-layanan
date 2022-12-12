@@ -4,6 +4,7 @@ use App\Http\Controllers\API\DokterController;
 use App\Http\Controllers\API\KamarController;
 use App\Http\Controllers\API\PMKPController;
 use App\Http\Controllers\API\PoliklinikController;
+use App\Http\Controllers\API\SpesialisController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
