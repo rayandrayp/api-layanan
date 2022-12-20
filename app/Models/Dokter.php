@@ -10,6 +10,8 @@ class Dokter extends Model
     use HasFactory;
     protected $table = 'dokter';
     protected $primaryKey = 'kd_dokter';
+    // hide tgl_lahir, gol_drh, agama, almt_tgl, no_telp, stts_nikah fields
+    protected $hidden = ['tgl_lahir', 'gol_drh', 'agama', 'almt_tgl', 'no_telp', 'stts_nikah'];
 
     public function spesialis()
     {

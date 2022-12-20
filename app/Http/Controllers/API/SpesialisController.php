@@ -33,7 +33,7 @@ class SpesialisController extends Controller
      */
     public function show($id)
     {
-        $data = Spesialis::with('dokter')->where('kd_sps', $id)->first();
+        $data = Spesialis::with('dokter.jadwal')->where('kd_sps', $id)->first();
         if ($data) {
             return ApiFormatter::createAPI(200, 'Success', $data);
         } else {
