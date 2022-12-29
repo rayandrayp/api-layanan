@@ -15,11 +15,11 @@ class Poliklinik extends Model
 
     public function jadwal()
     {
-        return $this->hasMany(Jadwal::class, 'kd_poli');
+        return $this->hasMany(Jadwal::class, 'kd_poli', 'kd_poli');
     }
 
     public function dokter()
     {
-        return $this->hasManyThrough(Dokter::class, Jadwal::class, 'kd_poli', 'kd_dokter');
+        return $this->hasManyThrough(Dokter::class, Jadwal::class, 'kd_poli', 'kd_dokter', 'kd_poli', 'kd_dokter');
     }
 }
