@@ -17,7 +17,7 @@ class PoliklinikController extends Controller
      */
     public function index()
     {
-        $data = Poliklinik::all();
+        $data = Poliklinik::where('status', '=', '1')->get();
         if ($data) {
             return ApiFormatter::createAPI(200, 'Success', $data);
         } else {
@@ -33,7 +33,7 @@ class PoliklinikController extends Controller
      */
     public function show($id)
     {
-        $data = Poliklinik::where('kd_poli', '=', $id)->get();
+        $data = Poliklinik::with('dokter.jadwal')->where('kd_poli', '=', $id)->get();
         if ($data) {
             return ApiFormatter::createAPI(200, 'Success', $data);
         } else {
