@@ -33,7 +33,7 @@ class PoliklinikController extends Controller
      */
     public function show($id)
     {
-        $data = Poliklinik::with('dokter.jadwal')->where('kd_poli', '=', $id)->get();
+        $data = Poliklinik::with('dokter.jadwal')->find($id);
         if ($data) {
             return ApiFormatter::createAPI(200, 'Success', $data);
         } else {
