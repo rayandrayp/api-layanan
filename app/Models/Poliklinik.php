@@ -20,6 +20,8 @@ class Poliklinik extends Model
 
     public function dokter()
     {
-        return $this->hasManyThrough(Dokter::class, Jadwal::class, 'kd_poli', 'kd_dokter', 'kd_poli', 'kd_dokter');
+        // return $this->hasManyThrough(Dokter::class, Jadwal::class, 'kd_poli', 'kd_dokter', 'kd_poli', 'kd_dokter');
+        // hasManyThrough group by dokter
+        return $this->hasManyThrough(Dokter::class, Jadwal::class, 'kd_poli', 'kd_dokter', 'kd_poli', 'kd_dokter')->groupBy('dokter.kd_dokter');
     }
 }
