@@ -12,6 +12,9 @@ class Poliklinik extends Model
     protected $primaryKey = 'kd_poli';
     protected $keyType = 'string';
     public $incrementing = false;
+    protected $hidden = [
+        'laravel_through_key'
+     ];
 
     public function jadwal()
     {
@@ -20,8 +23,6 @@ class Poliklinik extends Model
 
     public function dokter()
     {
-        // return $this->hasManyThrough(Dokter::class, Jadwal::class, 'kd_poli', 'kd_dokter', 'kd_poli', 'kd_dokter');
-        // hasManyThrough group by dokter
         return $this->hasManyThrough(
             Dokter::class, 
             Jadwal::class, 
@@ -36,7 +37,20 @@ class Poliklinik extends Model
                 'dokter.jk',
                 'dokter.alumni',
                 'dokter.no_ijn_praktek',
-                'dokter.status'
+                'dokter.status',
+                'dokter.tmp_lahir',
+                'dokter.tgl_lahir',
+                'dokter.gol_drh',
+                'dokter.agama',
+                'dokter.almt_tgl',
+                'dokter.no_telp',
+                'dokter.stts_nikah',
+                'jadwal.kd_poli'
             );
+    }
+
+    public function jenisPerawatan()
+    {
+        return $this->hasMany(JenisPerawatan::class, 'kd_poli', 'kd_poli');
     }
 }
