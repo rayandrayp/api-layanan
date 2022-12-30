@@ -11,7 +11,7 @@ class Dokter extends Model
     protected $table = 'dokter';
     protected $primaryKey = 'kd_dokter';
     // hide tgl_lahir, gol_drh, agama, almt_tgl, no_telp, stts_nikah fields
-    protected $hidden = ['tgl_lahir', 'gol_drh', 'agama', 'almt_tgl', 'no_telp', 'stts_nikah'];
+    protected $hidden = ['tgl_lahir', 'gol_drh', 'agama', 'almt_tgl', 'no_telp', 'stts_nikah','tmp_lahir'];
 
     public function spesialis()
     {
