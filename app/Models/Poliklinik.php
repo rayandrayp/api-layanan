@@ -22,6 +22,6 @@ class Poliklinik extends Model
     {
         // return $this->hasManyThrough(Dokter::class, Jadwal::class, 'kd_poli', 'kd_dokter', 'kd_poli', 'kd_dokter');
         // hasManyThrough group by dokter
-        return $this->hasManyThrough(Dokter::class, Jadwal::class, 'kd_poli', 'kd_dokter', 'kd_poli', 'kd_dokter')->groupBy('dokter.kd_dokter');
+        return $this->hasManyThrough(Dokter::class, Jadwal::class, 'kd_poli', 'kd_dokter', 'kd_poli', 'kd_dokter')->groupBy('dokter.kd_dokter','poliklinik.kd_poli');
     }
 }
