@@ -17,12 +17,7 @@ class DokterController extends Controller
      */
     public function index()
     {
-        // $data = Dokter::all();
-        // $data = DB::table('dokter')
-        //         ->join('spesialis', 'spesialis.kd_sps', '=', 'dokter.kd_sps')
-        //         ->where('dokter.status', '=', '1')
-        //         ->get();
-        $data = Dokter::with('spesialis','jadwal')->where('status', '=', '1')->get();
+        $data = Dokter::with('spesialis','jadwal','poliklinik')->where('status', '=', '1')->get();
         if ($data) {
             return ApiFormatter::createAPI(200, 'Success', $data);
         } else {
@@ -38,13 +33,7 @@ class DokterController extends Controller
      */
     public function show($id)
     {
-        // $data = Dokter::where('kd_dokter', '=', $id)->get();
-        // $data = DB::table('dokter')
-        //         ->join('spesialis', 'spesialis.kd_sps', '=', 'dokter.kd_sps')
-        //         ->where('dokter.status', '=', '1')
-        //         ->where('dokter.kd_dokter', '=', $id)
-        //         ->get();
-        $data = Dokter::with('spesialis','jadwal')->where('kd_dokter', '=', $id)->get();
+        $data = Dokter::with('spesialis','jadwal','poliklinik')->where('kd_dokter', '=', $id)->first();
         if ($data) {
             return ApiFormatter::createAPI(200, 'Success', $data);
         } else {

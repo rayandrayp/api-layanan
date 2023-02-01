@@ -13,7 +13,8 @@ class Poliklinik extends Model
     protected $keyType = 'string';
     public $incrementing = false;
     protected $hidden = [
-        'laravel_through_key'
+        'laravel_through_key',
+        'pivot'
      ];
 
     public function jadwal()
