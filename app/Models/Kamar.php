@@ -9,4 +9,5 @@ class Kamar extends Model
 {
     use HasFactory;
     protected $table = 'kamar';
+    protected $primaryKey = 'kd_kamar';
 }

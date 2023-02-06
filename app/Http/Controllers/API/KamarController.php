@@ -86,12 +86,11 @@ class KamarController extends Controller
                 ->orderBy('bangsal.nm_bangsal')
                 ->get();
         } else {
-            $data = DB::table('kamar')
+            $data = \App\Models\Kamar::where('statusdata', '1')
                 ->groupBy('kelas')
-                ->selectRaw('kelas, SUM(kelas), 
+                ->selectRaw('kelas, COUNT(kelas) AS jml_kamar, 
                             SUM(CASE WHEN `status` = \'ISI\' THEN 1 ELSE 0 END) kamar_isi,
                             SUM(CASE WHEN `status` = \'KOSONG\' THEN 1 ELSE 0 END) kamar_kosong')
-                ->where('statusdata', '1')
                 ->get();
         }
         if ($data) {

@@ -5,6 +5,7 @@ use App\Http\Controllers\API\KamarController;
 use App\Http\Controllers\API\PMKPController;
 use App\Http\Controllers\API\PoliklinikController;
 use App\Http\Controllers\API\SpesialisController;
+use App\Http\Controllers\API\LaporanSPIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,9 +35,9 @@ Route::group(['prefix' => 'poliklinik'], function () {
 });
 Route::group(['prefix' => 'kamar'], function () {
     Route::get('/', [KamarController::class, 'index']);
-    Route::get('/{kd_bangsal}', [KamarController::class, 'show']);
     Route::get('kelas', [KamarController::class, 'kelas']);
     Route::get('kelas/{kelas}', [KamarController::class, 'kelas']);
+    Route::get('/{kd_bangsal}', [KamarController::class, 'show']);
 });
 Route::group(['prefix' => 'pmkp'], function () {
     Route::get('/indikator-mutu-nasional/{year}', [PMKPController::class, 'indikatorMutuNasional']);
@@ -46,6 +47,8 @@ Route::group(['prefix'=>'spesialis'], function () {
     Route::get('/', [SpesialisController::class, 'index']);
     Route::get('/{kd_sps}', [SpesialisController::class, 'show']);
 });
+
+Route::apiResource('laporan-spi', LaporanSPIController::class);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
