@@ -35,17 +35,13 @@ class Poliklinik extends Model
                 'dokter.kd_dokter',
                 'dokter.nm_dokter',
                 'dokter.kd_sps',
-                'dokter.jk',
-                'dokter.alumni',
-                'dokter.no_ijn_praktek',
                 'dokter.status',
-                'dokter.tmp_lahir',
-                'dokter.tgl_lahir',
-                'dokter.gol_drh',
-                'dokter.agama',
-                'dokter.almt_tgl',
-                'dokter.no_telp',
-                'dokter.stts_nikah',
+                'jadwal.kd_poli'
+            )->select(
+                'dokter.kd_dokter',
+                'dokter.nm_dokter',
+                'dokter.kd_sps',
+                'dokter.status',
                 'jadwal.kd_poli'
             );
     }

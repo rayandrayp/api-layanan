@@ -11,6 +11,7 @@ class Dokter extends Model
     protected $table = 'dokter';
     protected $primaryKey = 'kd_dokter';
     protected $hidden = ['tgl_lahir', 'gol_drh', 'agama', 'almt_tgl', 'no_telp', 'stts_nikah','tmp_lahir','laravel_through_key'];
+    public $incrementing = false;
 
     public function spesialis()
     {
