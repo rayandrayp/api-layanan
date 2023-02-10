@@ -10,6 +10,7 @@ class JenisPerawatan extends Model
     use HasFactory;
     protected $table = 'jns_perawatan';
     protected $primaryKey = 'kd_jenis_prw';
+    public $incrementing = false;
 
     public function poliklinik()
     {
