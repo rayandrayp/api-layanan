@@ -12,7 +12,7 @@ class Jadwal extends Model
 
     public function dokter()
     {
-        return $this->belongsTo(Dokter::class,'kd_dokter','kd_dokter');
+        return $this->belongsTo(Dokter::class,'kd_dokter','kd_dokter')->where('status', '1');
     }
 
     public function poliklinik()
