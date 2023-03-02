@@ -72,12 +72,13 @@ class KamarController extends Controller
     {
         if ($kelas) {
             $data = \App\Models\Bangsal::join('kamar', 'kamar.kd_bangsal', '=', 'bangsal.kd_bangsal')
-                ->groupBy('kamar.kelas', 'bangsal.kd_bangsal', 'bangsal.nm_bangsal')
+                ->groupBy('kamar.kelas', 'bangsal.kd_bangsal', 'bangsal.nm_bangsal','kamar.trf_kamar')
                 ->selectRaw('
                         bangsal.kd_bangsal, 
                         bangsal.nm_bangsal, 
                         COUNT(kamar.kd_bangsal) AS jml_kamar, 
                         kamar.kelas,
+                        kamar.trf_kamar,
                         SUM(CASE WHEN kamar.`status` = "ISI" THEN 1 ELSE 0 END) kamar_isi,
                         SUM(CASE WHEN kamar.`status` = "KOSONG" THEN 1 ELSE 0 END) kamar_kosong
                     ')
