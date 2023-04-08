@@ -17,7 +17,9 @@ class SpesialisController extends Controller
      */
     public function index()
     {
-        $data = Spesialis::all();
+        $arrspesialis=array('Sp.A','Sp.An','Sp.B','Sp.BM','Sp.BP','Sp.BS','Sp.DV','Sp.JP','Sp.KF','Sp.KJ','Sp.KK','Sp.M','Sp.OG','Sp.OT','Sp.P','Sp.PA','Sp.PD','Sp.PK','Sp.Pr','Sp.Ra','Sp.S','Sp.TH','Sp.U','SpRad','TKV');
+        $data = Spesialis::whereIn('kd_sps', $arrspesialis)->get();
+        // $data = Spesialis::all();
         if ($data) {
             return ApiFormatter::createAPI(200, 'Success', $data);
         } else {

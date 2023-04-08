@@ -17,7 +17,7 @@ class DokterController extends Controller
      */
     public function index()
     {
-        $data = Dokter::with('spesialis','jadwal','poliklinik')->where('status', '=', '1')->get();
+        $data = Dokter::with('spesialis','jadwal','poliklinik')->where('status', '=', '1')->whereNotIn('kd_sps', ['-','UMUM'])->orderBy('nm_dokter', 'ASC')->get();
         if ($data) {
             return ApiFormatter::createAPI(200, 'Success', $data);
         } else {
