@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Jadwal extends Model
 {
     use HasFactory;
-    protected $table = 'jadwal';
+    protected $table = 'jadwal_web';
 
     public function dokter()
     {

@@ -46,18 +46,18 @@ class DokterController extends Controller
         if ($id) {
             $data = DB::table('dokter')
                 ->join('spesialis', 'spesialis.kd_sps', '=', 'dokter.kd_sps')
-                ->join('jadwal', 'jadwal.kd_dokter', '=', 'dokter.kd_dokter')
-                ->join('poliklinik', 'poliklinik.kd_poli', '=', 'jadwal.kd_poli')
-                ->select('dokter.kd_dokter', 'dokter.nm_dokter', 'spesialis.nm_sps', 'jadwal.hari_kerja', 'jadwal.jam_mulai', 'jadwal.jam_selesai', 'poliklinik.nm_poli')
+                ->join('jadwal_web', 'jadwal_web.kd_dokter', '=', 'dokter.kd_dokter')
+                ->join('poliklinik', 'poliklinik.kd_poli', '=', 'jadwal_web.kd_poli')
+                ->select('dokter.kd_dokter', 'dokter.nm_dokter', 'spesialis.nm_sps', 'jadwal_web.hari_kerja', 'jadwal_web.jam_mulai', 'jadwal_web.jam_selesai', 'poliklinik.nm_poli')
                 ->where('dokter.status', '=', '1')
                 ->where('dokter.kd_dokter', '=', $id)
                 ->get();
         } else {
             $data = DB::table('dokter')
                 ->join('spesialis', 'spesialis.kd_sps', '=', 'dokter.kd_sps')
-                ->join('jadwal', 'jadwal.kd_dokter', '=', 'dokter.kd_dokter')
-                ->join('poliklinik', 'poliklinik.kd_poli', '=', 'jadwal.kd_poli')
-                ->select('dokter.kd_dokter', 'dokter.nm_dokter', 'spesialis.nm_sps', 'jadwal.hari_kerja', 'jadwal.jam_mulai', 'jadwal.jam_selesai', 'poliklinik.nm_poli')
+                ->join('jadwal_web', 'jadwal_web.kd_dokter', '=', 'dokter.kd_dokter')
+                ->join('poliklinik', 'poliklinik.kd_poli', '=', 'jadwal_web.kd_poli')
+                ->select('dokter.kd_dokter', 'dokter.nm_dokter', 'spesialis.nm_sps', 'jadwal_web.hari_kerja', 'jadwal_web.jam_mulai', 'jadwal_web.jam_selesai', 'poliklinik.nm_poli')
                 ->where('dokter.status', '=', '1')
                 ->get();
         }

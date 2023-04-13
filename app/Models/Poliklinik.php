@@ -36,13 +36,13 @@ class Poliklinik extends Model
                 'dokter.nm_dokter',
                 'dokter.kd_sps',
                 'dokter.status',
-                'jadwal.kd_poli'
+                'jadwal_web.kd_poli'
             )->select(
                 'dokter.kd_dokter',
                 'dokter.nm_dokter',
                 'dokter.kd_sps',
                 'dokter.status',
-                'jadwal.kd_poli'
+                'jadwal_web.kd_poli'
             );
     }
 

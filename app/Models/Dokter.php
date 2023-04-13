@@ -32,8 +32,8 @@ class Dokter extends Model
             'poliklinik.registrasi',
             'poliklinik.registrasilama',
             'poliklinik.status',
-            'jadwal.kd_poli',
-            'jadwal.kd_dokter'
+            'jadwal_web.kd_poli',
+            'jadwal_web.kd_dokter'
         );
     }
 }
