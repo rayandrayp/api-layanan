@@ -35,11 +35,21 @@ class SpesialisController extends Controller
      */
     public function show($id)
     {
-        $data = Spesialis::with('dokter.jadwal','dokter.poliklinik')->where('kd_sps', $id)->first();
-        if ($data) {
-            return ApiFormatter::createAPI(200, 'Success', $data);
-        } else {
-            return ApiFormatter::createAPI(400, 'Failed retrieving data.');
+        $arrspesialis=array('Sp.PD','Sp.P');
+        if($id == "konsulan"){
+            $data = Spesialis::with('dokter.jadwal','dokter.poliklinik')->whereIn('kd_sps', $arrspesialis)->first();
+            if ($data) {
+                return ApiFormatter::createAPI(200, 'Success', $data);
+            } else {
+                return ApiFormatter::createAPI(400, 'Failed retrieving data.');
+            }
+        }else{
+            $data = Spesialis::with('dokter.jadwal','dokter.poliklinik')->where('kd_sps', $id)->first();
+            if ($data) {
+                return ApiFormatter::createAPI(200, 'Success', $data);
+            } else {
+                return ApiFormatter::createAPI(400, 'Failed retrieving data.');
+            }
         }
     }
     /**
