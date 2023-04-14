@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Helpers\ApiFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Spesialis;
+use App\Models\Dokter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -37,10 +38,15 @@ class SpesialisController extends Controller
     {
         $arrspesialis=array('Sp.PD','Sp.P');
         if($id == "konsulan"){
-            $data = Spesialis::with('dokter.jadwal','dokter.poliklinik')->whereIn('kd_sps', $arrspesialis)->first();
-            if ($data) {
-                return ApiFormatter::createAPI(200, 'Success', $data);
-            } else {
+            $arr_dokter = ['D0000141','201706004','D0000142'];
+            $spesialis['kd_sps'] = "konsulan";
+            $spesialis['nm_sps'] = "Dokter Konsulan";
+            $spesialis['dokter'] = Dokter::whereIn('kd_dokter', $arr_dokter)
+                                ->with('jadwal','poliklinik')
+                                ->get();
+            if ($spesialis) {
+                return ApiFormatter::createAPI(200, 'Success', $spesialis);
+            }else{
                 return ApiFormatter::createAPI(400, 'Failed retrieving data.');
             }
         }else{
