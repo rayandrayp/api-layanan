@@ -71,19 +71,19 @@ class KamarController extends Controller
     public function kelas($kelas = null)
     {
         if ($kelas) {
-            $data = \App\Models\Bangsal::join('kamar', 'kamar.kd_bangsal', '=', 'bangsal.kd_bangsal')
-                ->groupBy('kamar.kelas', 'bangsal.kd_bangsal', 'bangsal.nm_bangsal','kamar.trf_kamar')
+            $data = \App\Models\Bangsal::join('kamar_web', 'kamar_web.kd_bangsal', '=', 'bangsal.kd_bangsal')
+                ->groupBy('kamar_web.kelas', 'bangsal.kd_bangsal', 'bangsal.nm_bangsal','kamar_web.trf_kamar')
                 ->selectRaw('
                         bangsal.kd_bangsal, 
                         bangsal.nm_bangsal, 
-                        COUNT(kamar.kd_bangsal) AS jml_kamar, 
-                        kamar.kelas,
-                        kamar.trf_kamar,
-                        SUM(CASE WHEN kamar.`status` = "ISI" THEN 1 ELSE 0 END) kamar_isi,
-                        SUM(CASE WHEN kamar.`status` = "KOSONG" THEN 1 ELSE 0 END) kamar_kosong
+                        COUNT(kamar_web.kd_bangsal) AS jml_kamar, 
+                        kamar_web.kelas,
+                        kamar_web.trf_kamar,
+                        SUM(CASE WHEN kamar_web.`status` = "ISI" THEN 1 ELSE 0 END) kamar_isi,
+                        SUM(CASE WHEN kamar_web.`status` = "KOSONG" THEN 1 ELSE 0 END) kamar_kosong
                     ')
                 ->where('statusdata', '1')
-                ->where('kamar.kelas', $kelas)
+                ->where('kamar_web.kelas', $kelas)
                 ->orderBy('bangsal.nm_bangsal')
                 ->get();
         } else {
