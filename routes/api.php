@@ -6,6 +6,9 @@ use App\Http\Controllers\API\PMKPController;
 use App\Http\Controllers\API\PoliklinikController;
 use App\Http\Controllers\API\SpesialisController;
 use App\Http\Controllers\API\LaporanSPIController;
+use App\Http\Controllers\APIDashboard\DashboardController;
+use App\Http\Controllers\APIDashboard\RalanController;
+use App\Http\Controllers\APIDashboard\RanapController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +49,21 @@ Route::group(['prefix' => 'pmkp'], function () {
 Route::group(['prefix'=>'spesialis'], function () {
     Route::get('/', [SpesialisController::class, 'index']);
     Route::get('/{kd_sps}', [SpesialisController::class, 'show']);
+});
+
+Route::group(['prefix' => 'dashboard'], function () {
+    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/range/{daterange}', [DashboardController::class, 'range']);
+});
+
+Route::group(['prefix' => 'ralan'], function () {
+    Route::get('/', [RalanController::class, 'index']);
+    Route::get('/range/{daterange}', [RalanController::class, 'range']);
+});
+
+Route::group(['prefix' => 'ranap'], function () {
+    Route::get('/', [RanapController::class, 'index']);
+    Route::get('/range/{daterange}', [RanapController::class, 'range']);
 });
 
 Route::apiResource('laporan-spi', LaporanSPIController::class);
