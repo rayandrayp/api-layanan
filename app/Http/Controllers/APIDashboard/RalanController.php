@@ -28,6 +28,8 @@ class RalanController extends Controller
         $data['JnsBayarPxRalan'] = $this->JnsBayar($dateNow,$dateNow);
         $data['JnsPxRalan'] = $this->JnsPasien($dateNow,$dateNow);
         $data['TrendKunjungan'] = $this->TrendKunjungan();
+        $data['PenyakitRalan'] = $this->Penyakit($dateNow,$dateNow);
+
         if ($data) {
             return ApiFormatter::createAPI(200, 'Success', $data);
         } else {
@@ -48,6 +50,8 @@ class RalanController extends Controller
         $data['JnsBayarPxRalan'] = $this->JnsBayar($dateArr[0],$dateArr[1]);
         $data['JnsPxRalan'] = $this->JnsPasien($dateArr[0],$dateArr[1]);
         $data['TrendKunjungan'] = $this->TrendKunjungan();
+        $data['PenyakitRalan'] = $this->Penyakit($dateArr[0],$dateArr[1]);
+
         if ($data) {
             return ApiFormatter::createAPI(200, 'Success', $data);
         } else {
@@ -167,6 +171,32 @@ class RalanController extends Controller
                 ->where('tgl_registrasi','LIKE', date('Y').'%')
                 ->groupBy('LEFT(tgl_registrasi, 7)')
                 ->get();
+        $data = [
+            'data' => $dataQuery
+        ];
+        return $data;
+    }
+
+    public function Penyakit($date1,$date2)
+    {        
+        
+        $dataQuery = DB::select(DB::raw("SELECT COUNT(d.kd_penyakit) as count ,p.nm_penyakit  FROM kamar_inap k
+                                            INNER JOIN diagnosa_pasien d ON d.no_rawat = k.no_rawat
+                                            INNER JOIN penyakit p ON p.kd_penyakit = d.kd_penyakit
+                                            WHERE k.tgl_masuk between '$date1' and '$date2'
+                                            GROUP BY d.kd_penyakit ORDER BY `count`  DESC Limit 10"));
+
+        // $dataQuery = DB::table('reg_periksa')
+        //     ->join('diagnosa_pasien', 'diagnosa_pasien.no_rawat', '=', 'reg_periksa.no_rawat')
+        //     ->join('penyakit', 'penyakit.kd_penyakit', '=', 'diagnosa_pasien.kd_penyakit')
+        //     ->selectRaw('
+        //                 COUNT(diagnosa_pasien.kd_penyakit) as count,
+        //                 penyakit.nm_penyakit
+        //             ')
+        //     ->where('diagnosa_pasien.status', 'Ralan')
+        //     ->whereBetween('reg_periksa.tgl_registrasi', [$date1,$date2])
+        //     ->groupBy('diagnosa_pasien.kd_penyakit')
+        //     ->get();
         $data = [
             'data' => $dataQuery
         ];
